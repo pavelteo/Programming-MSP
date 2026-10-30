@@ -1,2 +1,3 @@
 # Programming-MSP
-Final project using JS, HTML and SPARQL.
+ # Project ideas:
+ Drug interactions with psilocibin (maybe look in the time of metabolization of psilocibin IN psilocin - which is actually the receptor transmiter). Quantity of ingested psilocibin, along with the timeline of the on set and final metabolization of the drug. If time allows, it would be nice to take a different data set with a neurotransmitter that interacts with the same type of serotonergic receptor, like DMT. Considerations: Existing database for humans, time for comparasion and analysis  for DMT/Psilocybin differences(double the work in theory, but if I am fast learner, after I finish the Psilocybin)
