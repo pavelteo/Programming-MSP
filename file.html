@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Modulators of the Serotonin Receptor 2A </title>
+</head>
+<body>
+
+    <h1> Receptor Data </h1>
+    <p> Click Button for data </p>
+
+    <button id="loadbtn">Get Data</button>
+    <pre id="output"></pre>
+
+    <script>
+        const endpointUrl = 'https://query.wikidata.org/sparql';
+        const query = `
+             SELECT ?receptor ?receptorLabel ?taxon ?taxonLabel ?bioProcess ?bioProcessLabel ?interactWith 
+  ?InteractWithLabel ?molFunction ?molFunctionLabel ?partOf ?partOfLabel
+WHERE {
+  BIND (wd:Q1949517 AS ?receptor)
+
+
+  ?receptor wdt:P703 ?taxon.
+  ?receptor wdt:P682 ?bioProcess.
+  ?receptor wdt:P129 ?interactsWith.
+  ?receptor wdt:P680 ?molFunction.
+  ?receptor wdt:P361 ?partOf.
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+
+
+  
+}
+LIMIT 20
+ `;
+
+async function getReceptorData() {
+      const url = endpoint + "?query=" + encodeURIComponent(query) + "&format=json";
+      const response = await fetch(url);
+      const data = await response.json();
+      return data.results.bindings;
+    }
+
+    const button = document.getElementById("loadbtn");
+    const output = document.getElementById("output");
+
+    button.onclick = async function () {
+      output.textContent = "Loading...";
+      const rows = await getReceptorData();
+      output.textContent = JSON.stringify(rows.slice(0, 3), null, 2);
+    };
+  </script>
+
+</body>
+</html>
